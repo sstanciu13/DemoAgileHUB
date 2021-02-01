@@ -36,7 +36,7 @@ public class TestClass1 {
     }
 
     @Test
-    public void getUserByPage(){
+    public void getUsersByPage(){
         System.out.println("This test is retrieving users, for a specific page.");
         System.out.println("Default display is 6 users per page.");
 
@@ -47,7 +47,7 @@ public class TestClass1 {
             .queryParam("page", "2")
         .when()
             .get("/api/users")
-            .then()
+        .then()
             .statusCode(200)
             .assertThat()
                 .body("page", equalTo(2))
@@ -86,7 +86,7 @@ public class TestClass1 {
     public void userCreateReadDelete(){
         System.out.println("This test is creating a new user, is checking it, then is deleting it.");
 
-        File addPetJsonData = new File(System.getProperty("user.dir")
+        File createUserJsonFile = new File(System.getProperty("user.dir")
                 + ".src.test.resources.test_data.".replace(".", System.getProperty("file.separator"))
                 + "CreateUser.json");
 
@@ -97,7 +97,7 @@ public class TestClass1 {
                                     .filter(new ResponseLoggingFilter())
                                     .contentType(ContentType.JSON)
                                     .baseUri("https://reqres.in")
-                                    .body(addPetJsonData)
+                                    .body(createUserJsonFile)
                             .when()
                                     .post("/api/users")
                             .then()
